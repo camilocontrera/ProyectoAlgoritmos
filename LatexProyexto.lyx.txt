@@ -1,0 +1,200 @@
+\documentclass{article}
+
+% Language setting
+% Replace `english' with e.g. `spanish' to change the document language
+\usepackage[spanish]{babel}
+\usepackage{algpseudocode}
+
+% Set page size and margins
+% Replace `letterpaper' with `a4paper' for UK/EU standard size
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\graphicspath{images}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\graphicspath{ {images/} }
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{algorithm, algpseudocode}
+
+\title{Entrega Final Proyecto: "Taquin"
+}
+\author{}
+
+\author{Cristian Camilo Contreras Borja$^{1}$ 
+\and Kevin Andres Garzon Ospina $^{2}$  
+\and Nicolas David Gil Hernandez$^{3}$\\ \\
+\texttt{Pontificia Universidad Javeriana,  Bogota D.c, Colombia.}\\
+\texttt{\{$^{1}$contreras cristian, $^{2}$Ka garzon , $^{3}$nicolas gil \}@Javeriana.edu.co}}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+En este docuemnto se presentara el analisis,diseño e implementacion del algortimo para jugar de manera autonoma el juego "Taquin" dado un tamaño del tablero de juego.
+
+\end{abstract}
+
+\keywords{
+Keywords: Arboles,Taquin
+}
+
+\section{Parte I Análisis y diseño del problema}
+
+\subsection{Análisis}
+
+\begin{figure}[h]
+\centerline{\includegraphics[scale=0.5]{taquin.png}}
+\caption{Ejemplificacion Juego Taquin.}
+\label{fig}
+\end{figure}
+
+El problema informalmente se puede definir como: implementar el juego de TAQUIN el cual consiste en el deslizamiento de piezas que presentan un determinado orden inicial dentro de una caja cuadrada (matriz cuadrada) de las cuales solo una de sus casillas no esta ocupada. Los numeros dentro de la matriz estan desordenados, el juego consiste en maniobrar todas las fichas para corregir el orden de estas, de manera que estas queden en orden consecutivo, se habla de una matriz de numeros:
+ \begin{algorithm}
+       
+                \State \textbf $M=<X1,X2,X3......Xn><Y1,Y2,Y3......Yn>= <Xi;Yi \in Z \land 0 ⩽ i ⩽ n>$
+          
+    \end{algorithm}
+    
+    
+donde n es el tamaño que tiene la matriz e i es el indice de cada elemento, en este caso se inicializa en 0 debido al uso de dicho numero en la matriz.
+
+    Varias preguntas surgen a traves de este contexto dado:
+    \begin{itemize}
+    \item ¿Solamente pueden ordenarse numeros enteros?
+    \item ¿Que criterio se toma para ordenar esta matriz?
+    
+
+    \end{itemize}
+
+Se conoce que los numeros enteros no son los unicos elementos ordenables, en varios contextos se pueden ordenar otro tipos de numeros tales como los naturales o los reales, pero a su vez se pueden ordenar elementos ya sea alfabeticamente, imagenes u otro orden especifico, aclarando esto se puede decir que la definicion de matriz para este problema cambiaria:
+
+\begin{algorithm}
+       
+                \State \textbf $M= <Xi,Yi \in T \land 0 ⩽ i ⩽ n>$
+          
+    \end{algorithm}
+
+donde T es un conjunto de elementos que se pueden ordenar.  
+
+De igual manera se sabe que la forma mas logica de comparar dos elementos sea a traves de un simbolo como lo es ⩽ lo cual hace que podamos distinguir cual de dos elementos tienen su orden respectivo.
+
+Algunos datos para tener en cuenta para el diseño de este algoritmo son los siguientes:
+
+\begin{itemize}
+\item La matriz ques sera trabajada durante el problema tendra como valores datos numericos enteros para facilitar la expliacacion.
+\item La matriz contara con n dimensiones como se habia aclarado anteriormente.
+\item Los datos numericos de la matriz seran dados de manera aleatorea por el algortimo
+
+\end{itemize}
+
+\section{Diseño}
+
+Con base en las observaciones presentadas en el análisis anterior, podemos escribir un diseño de algoritmo para resolver el problema de jugar TAQUIN. Se evidencia ciertas variables que cambian en la entrada del algoritmo.
+
+\subsection{Entradas}
+
+  
+
+\begin{enumerate}
+\item Un numero n \in Z , este dato hace referencia al tamaño que se le dara a la matriz en la que se trabajara.
+\end{enumerate}
+
+\subsection{Salidas}
+\begin{enumerate}
+\item Una numero n \in Z, el cual representa la cantidad de pasos para llegar a la solucion
+\item Secuencias $S= <Xi \in T \land 0 ⩽ i ⩽ n>$ donde las secuencias que se muestran son la solucion paso a paso del tablero
+\end{enumerate}
+
+\vspace{8cm}\vspace{8cm}
+
+\section{Parte II Algoritmo}
+
+\subsection{Algoritmo}
+
+
+
+
+
+    \begin{algorithm}
+        \caption{$main$}
+        \begin{algorithmic}[1]
+            \Procedure {D_aux} {$A,I,V$}
+            
+                \If{$V = 0$}
+                    \State \textbf{return} $0$
+                
+                 \Else\State \If{$I = 0$}
+                    \State \textbf{return} $I$
+                    \EndIf
+                \Else\State \If{$A[I] > V$}
+                \State \textbf{return} $D_aux(A,I-1,V)$
+                \EndIf
+                 \Else\State \If{$A[I] <= V$}
+                \State \textbf{return} $D_aux(A,I,V-A[I])+1$
+                \EndIf
+                 \EndIf
+            \EndProcedure
+        \end{algorithmic}
+    \end{algorithm}
+
+    \begin{algorithm}
+        \caption{$solution$}
+        \begin{algorithmic}[2]
+            \Procedure {sol} {$S$}
+            
+                \State \textbf{iniciarTablero()} 
+                
+                \State \While{$cola$}
+                    \State $nodo \gets cola.pop() $
+                    
+                    \If{$nodo.resuelto$}
+                        \State $z \gets list(nodo.camino) $
+                        \State $final(z)$
+                    \EndIf
+                    
+                    \For  {movimiento, dir \gets nodo.acciones \hspace{0.2cm}}
+                        
+                        \State \hspace{0.4cm}$hijos \gets nodo(movimiento(),nodo,dir) $
+                        \If{$hijos.estado \hspace{0.2cm} not \hspace{0.2cm} in \hspace{0.2cm} arbol$}
+                            \State $cola.appendleft(hijos) $
+                            \State $arbol.add(hijos.estado)$
+                        \EndIf
+                        
+                    \State \textbf{end for} 
+                    
+                    
+                \EndWhile
+            \EndProcedure
+        \end{algorithmic}
+    \end{algorithm}
+    
+    
+    
+\vspace{8cm}
+
+    
+\subsection{Complejidad}
+
+	El algoritmo \textit{Algoritmo para jugar "Taquin}. tiene orden de complejidad \[O(log2(n))\]
+	
+	
+	Este algoritmo que se diseño para calcular los nodos de cada instancia de tablero e ir calculando el menor de cada uno de ellos por lo tanto recorre la matriz completa, donde N hace referencia al tamaño de la matriz esto dado en su peor caso.
+	
+	
+	
+	
+
+\subsection{Invariante}
+
+La invariante del algoritmo propuesto consiste en la comparacion del nodo que se esta revisando con el nodo de estado final para valdiar si encontro la solucion.
+
+
+
+
+\end{document}
