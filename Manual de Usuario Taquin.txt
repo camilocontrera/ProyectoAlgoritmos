@@ -1,0 +1,17 @@
+####Manual de Usuario Taquin######
+
+Primero se deben descargar los 2 archivos:
+1. main.py
+2. TaquinFinalFinal
+
+Se deben revisar los respectivos imports de los demas archivos para evitar errores.
+
+En segundo lugar se debe correr el archivo main.py.
+
+Tercero se desplegara un mensaje con una pregunta del tamaño que desa el tablero de juego
+se debe escribir un numero entero a desear para crear la matriz aleatorea
+Tras escribir el numero deseado se dara enter y cargara la matriz generada aleatoriamente, y la 
+impresion de la matriz paso a paso con la solucion y tras imprimir todas las iteraciones
+mostrata la cantidad de pasos que tomo encontrar dicha solucion.
+
+####Manual de Usuario Taquin######
